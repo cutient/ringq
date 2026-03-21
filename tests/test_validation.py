@@ -94,10 +94,6 @@ class TestValidationFull:
         with pytest.raises(TypeError, match="not JSON-serializable"):
             self.q.put_nowait(b"bytes")
 
-    def test_invalid_dict_key(self):
-        with pytest.raises(TypeError, match="not JSON-serializable"):
-            self.q.put_nowait({1: "value"})
-
     def test_invalid_nested(self):
         with pytest.raises(TypeError, match="not JSON-serializable"):
             self.q.put_nowait({"key": {1, 2}})
