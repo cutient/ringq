@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include src/ringq/_core.pyx
+include src/ringq/_core.pxd
+include src/ringq/_fast_validate.pyx
+recursive-include src/ringq *.pyi
+include src/ringq/py.typed

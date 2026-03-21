@@ -1,0 +1,59 @@
+[project]
+name = "ringq"
+version = "0.1.0"
+description = "High-performance async queue backed by a Cython ring buffer"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "cutient"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/cutient/ringq"
+Repository = "https://github.com/cutient/ringq"
+"Bug Tracker" = "https://github.com/cutient/ringq/issues"
+Changelog = "https://github.com/cutient/ringq/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+orjson = ["orjson>=3.9"]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "cython>=3.0",
+    "orjson>=3.9",
+]
+
+[build-system]
+requires = ["setuptools>=68", "Cython>=3.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ringq = ["py.typed", "*.pyi", "*.pxd"]
+
+[tool.cibuildwheel]
+build = "cp310-* cp311-* cp312-* cp313-* cp314-*"
+skip = "*-musllinux_i686"
+build-frontend = "build"
+before-build = "pip install cython>=3.0"
+test-requires = ["pytest", "pytest-asyncio"]
+test-command = "pytest {project}/tests -v"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
